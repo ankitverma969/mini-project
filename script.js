@@ -1,122 +1,141 @@
+// =======================
+// PRODUCT LIST + PAGINATION
+// =======================
+
 fetch("https://dummyjson.com/products")
   .then(res => res.json())
   .then(data => {
-    let products = data.products;
-    let container = document.getElementById("prod");
+    const products = data.products;
+    const container = document.getElementById("prod");
+    const pagination = document.getElementById("pagination");
 
-    products.forEach(product => {
-      
-      let card = document.createElement("div");
-      card.className = "card";
+    const itemsPerPage = 8; // change if needed
+    let currentPage = 1;
 
-      let img = document.createElement("img");
-      img.src = product.thumbnail;
+    function renderProducts(page) {
+      container.innerHTML = "";
 
-      let title = document.createElement("h3");
-      title.innerText = product.title;
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const pageProducts = products.slice(start, end);
 
-      let price = document.createElement("p");
-      price.innerText = "₹ " + product.price;
+      pageProducts.forEach(product => {
+        let card = document.createElement("div");
+        card.className = "card";
 
-      card.appendChild(img);
-      card.appendChild(title);
-      card.appendChild(price);
+        let img = document.createElement("img");
+        img.src = product.thumbnail;
 
-      container.appendChild(card);
-      card.addEventListener("click", () => {
-        console.log("Card clicked", product.id);
-        let history = JSON.parse(localStorage.getItem("viewHistory")) || [];
-        // history = history.filter(item => item.toLowerCase() !== query.toLowerCase());
+        let title = document.createElement("h3");
+        title.innerText = product.title;
 
-        // const exists = history.some(
-        //   item => item.query.toLowerCase() === query.toLowerCase()
-        // );
+        let price = document.createElement("p");
+        price.innerText = "₹ " + product.price;
 
-      
+        card.append(img, title, price);
+        container.appendChild(card);
+
+        card.addEventListener("click", () => {
+          let history = JSON.parse(localStorage.getItem("viewHistory")) || [];
           history.push({
-            productId:product.id,
+            productId: product.id,
             time: Date.now()
-          })
+          });
           localStorage.setItem("viewHistory", JSON.stringify(history));
-        
-         
-        window.location.href = `product.html?id=${product.id}`;
+
+          window.location.href = `product.html?id=${product.id}`;
+        });
       });
-    });
+    }
+
+    function renderPagination() {
+      pagination.innerHTML = "";
+      const totalPages = Math.ceil(products.length / itemsPerPage);
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.innerText = i;
+
+        if (i === currentPage) btn.classList.add("active");
+
+        btn.addEventListener("click", () => {
+          currentPage = i;
+          renderProducts(currentPage);
+          renderPagination();
+        });
+
+        pagination.appendChild(btn);
+      }
+    }
+
+    renderProducts(currentPage);
+    renderPagination();
   })
   .catch(err => console.log(err));
 
 
-
-
-// Searching
+// =======================
+// SEARCH BUTTON
+// =======================
 
 const searchBtn = document.getElementById("searchBtn");
 const searchInput = document.getElementById("searchInput");
 
 searchBtn.addEventListener("click", () => {
   const query = searchInput.value;
-  console.log(query)
-  if(!query) return;
+  if (!query) return;
 
-  // Save to localStorage
   saveSearch(query);
+  window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+  searchInput.value = "";
+});
 
-  // Redirect with query param
-  window.location.href = `search.html?q=${encodeURIComponent(query)}`
-  searchInput.value="";
-})
 
-// function saveSearch(query){
-//   let searches = JSON.parse(localStorage.getItem("searches")) || [];
-//   searches = searches.filter(item => item.toLowerCase() !== query.toLowerCase());
-//   searches.unshift(query);
-//   searches = searches.slice(0, 5);
-//   localStorage.setItem("searches", JSON.stringify(searches));
-// }
+// =======================
+// SAVE SEARCH HISTORY
+// =======================
 
-function saveSearch(query){
+function saveSearch(query) {
   let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
-  // history = history.filter(item => item.toLowerCase() !== query.toLowerCase());
 
   const exists = history.some(
     item => item.query.toLowerCase() === query.toLowerCase()
   );
 
-  if(!exists){
+  if (!exists) {
     history.push({
       query: query,
       time: Date.now()
-    })
-    localStorage.setItem("searchHistory",JSON.stringify(history));
+    });
+    localStorage.setItem("searchHistory", JSON.stringify(history));
   }
 }
+
+
+// =======================
+// SEARCH SUGGESTIONS
+// =======================
 
 const suggestionBox = document.getElementById("suggestions");
 
 searchInput.addEventListener("input", () => {
-  console.log("Suggestion working");
-
   const text = searchInput.value.toLowerCase();
   const history = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
-  // Filter based on query field
-  const matches = history.filter(item => item.query.toLowerCase().includes(text));
+  const matches = history.filter(item =>
+    item.query.toLowerCase().includes(text)
+  );
 
-  console.log(matches);
-  
-  // Clear previous suggestions
   suggestionBox.innerHTML = "";
 
-  // Show suggestions
   matches.forEach(item => {
-    const div = document.createElement("div")
+    const div = document.createElement("div");
     div.className = "suggestion-item";
     div.innerText = item.query;
 
-    div.addEventListener("click" , () => {
+    div.addEventListener("click", () => {
       searchInput.value = item.query;
-      suggestionBox.innerText = "";
+      suggestionBox.innerHTML = "";
     });
 
     suggestionBox.appendChild(div);

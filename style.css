@@ -34,3 +34,19 @@ body {
   cursor: pointer;
   border-radius: 2px;
 }
+
+#pagination {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#pagination button {
+  margin: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+#pagination button.active {
+  background: black;
+  color: white;
+}
