@@ -1,52 +1,85 @@
+/* =========================
+   GLOBAL PAGE STYLING
+   ========================= */
+
+/* Basic font and background for the entire page */
 body {
   font-family: Arial;
-  background-color: rgb(241,244,244);
+  background-color: rgb(241, 244, 244);
 }
 
+
+/* =========================
+   PRODUCT GRID LAYOUT
+   ========================= */
+
+/* Container that holds all product cards */
 #prod {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  display: grid;                          /* Enables grid layout */
+  grid-template-columns: repeat(4, 1fr);  /* 4 cards per row */
+  gap: 20px;                              /* Space between cards */
 }
 
+
+/* =========================
+   PRODUCT CARD STYLING
+   ========================= */
+
+/* Individual product card */
 .card {
-  border: 1px solid grey;
-  padding: 10px;
-  border-radius: 8px;
-  background-color: white;
+  border: 1px solid grey;     /* Light border around card */
+  padding: 10px;              /* Inner spacing */
+  border-radius: 8px;         /* Rounded corners */
+  background-color: white;    /* Card background */
 }
 
+/* Product image inside card */
 .card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
+  width: 100%;                /* Full width of card */
+  height: 250px;              /* Fixed height */
+  object-fit: cover;          /* Crop image properly */
 }
 
+/* Hover effect on product card */
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    cursor: pointer;
+  transform: scale(1.05);                     /* Slight zoom */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);     /* Shadow effect */
+  cursor: pointer;                            /* Pointer cursor */
 }
 
-#searchBtn:hover{
-  background-color: rgb(198, 224, 246);
-  border: 1px solid grey;
-  cursor: pointer;
-  border-radius: 2px;
+
+/* =========================
+   SEARCH BUTTON STYLING
+   ========================= */
+
+/* Hover effect for search button */
+#searchBtn:hover {
+  background-color: rgb(198, 224, 246); /* Light blue background */
+  border: 1px solid grey;               /* Border on hover */
+  cursor: pointer;                      /* Pointer cursor */
+  border-radius: 2px;                   /* Slight rounding */
 }
 
+
+/* =========================
+   PAGINATION STYLING
+   ========================= */
+
+/* Pagination container */
 #pagination {
-  text-align: center;
-  margin: 20px 0;
+  text-align: center;     /* Center pagination buttons */
+  margin: 20px 0;         /* Vertical spacing */
 }
 
+/* Pagination buttons */
 #pagination button {
-  margin: 5px;
-  padding: 6px 12px;
-  cursor: pointer;
+  margin: 5px;            /* Space between buttons */
+  padding: 6px 12px;      /* Button size */
+  cursor: pointer;        /* Pointer cursor */
 }
 
+/* Active page button */
 #pagination button.active {
-  background: black;
-  color: white;
+  background: black;      /* Highlight active page */
+  color: white;           /* Text color */
 }
