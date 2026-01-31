@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Store</title>
-    <link href="./style.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
 </head>
 <body>
     <header class="nav-cover">
         <navbar class="navbar">
-            <div class="left-nav">Product Details</div>
+            <div class="left-nav">Product Store</div>
             <div class="right-nav">
             <form id="search-form">
                 <div class="search-element">
@@ -21,29 +21,22 @@
                 </div>
             </form>
             <div class="search-element">
-                <button class="nav-btn" onclick="goToSearchHistory()">Search History</button>
-            </div>
-            <div class="search-element">
-                <button class="nav-btn" onclick="goToViewHistory()">View History</button>
+                <button class="nav-btn" onclick="goToHistory()">View History</button>
             </div>
         </div>
     </navbar>
     </header>
-    <section id="product-detail">
-        <div class="product-detail-left">
-            <span id="availability"></span>
-            <img id="image">
+    <section id="product-section">
+        <div id="products">
+
         </div>
-        <div class="product-detail-right">
-            <div id="title"></div>
-            <div id="brand"></div>
-                <div id="price"></div>
-                <div id="rating"></div>
-            <div id="minOrder"></div>
-            <div id="description"></div>
+        <div class="page-btn">
+            <button id="prev-btn">Previous</button>
+            <div></div>
+            <button id="next-btn">Next</button>
         </div>
     </section>
 
 </body>
-<script src="./product.js"></script>
+<script src="./pagination.js"></script>
 </html>

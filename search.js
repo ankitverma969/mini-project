@@ -1,62 +1,125 @@
-// ===============================
-// READ SEARCH QUERY FROM URL
-// ===============================
+const params = new URLSearchParams(window.location.search);
+const query = params.get("search") || "";
 
-// Create an object to read URL parameters
-let param = new URLSearchParams(window.location.search);
+const productDiv = document.getElementById("products");
+const prevbtn = document.getElementById("prev-btn");
+const nextbtn = document.getElementById("next-btn");
 
-// Get the search query value (?q=...)
-let query = param.get("q");
+const form = document.getElementById("search-form");
+const searchbar = document.getElementById("search-bar");
 
+searchbar.value = query;
 
-// ===============================
-// FETCH PRODUCT DATA FROM API
-// ===============================
+let allproducts = [];
+let currentPage = 1;
+let windowSize = 8;
 
 fetch("https://dummyjson.com/products")
   .then(res => res.json())
-  .then(data => {
-
-    // Store all products received from API
-    let products = data.products;
-
-    // Filter products based on search query (case-insensitive)
-    let filtered = products.filter((p) => {
-      return p.title.toLocaleLowerCase().includes(query.toLocaleLowerCase());
-    });
-
-    // Get container where results will be displayed
-    let container = document.getElementById("prod");
-
-    // ===============================
-    // DISPLAY FILTERED PRODUCTS
-    // ===============================
-
-    filtered.forEach(product => {
-
-      // Create product card
-      let card = document.createElement("div");
-      card.className = "card";
-
-      // Product image
-      let img = document.createElement("img");
-      img.src = product.thumbnail;
-
-      // Product title
-      let title = document.createElement("h3");
-      title.innerText = product.title;
-
-      // Product price
-      let price = document.createElement("p");
-      price.innerText = "₹ " + product.price;
-
-      // Append elements to card
-      card.appendChild(img);
-      card.appendChild(title);
-      card.appendChild(price);
-
-      // Add card to container
-      container.appendChild(card);
-    });
+  .then(({ products }) => {
+    allproducts = products.filter(p =>
+      p.title.toLowerCase().includes(query.toLowerCase())
+    ); 
+    render();
   })
-  .catch(err => console.log(err));
+  .catch(err => console.error("Fetch failed:", err));
+
+function render() {
+  productDiv.innerHTML = ""; 
+
+  let start = (currentPage - 1) * windowSize;
+  let end = start + windowSize;
+
+  allproducts.slice(start, end).forEach(item => {
+    const product = document.createElement("div");
+    product.className = "product";
+
+    product.innerHTML = `
+      <img src="${item.thumbnail}" class="product-img" alt="${item.title}">
+      <h3 class="product-title">${item.title}</h3>
+      <p class="product-price">Price: $${item.price}</p>
+    `;
+
+    product.addEventListener("click", () => {
+      let history = JSON.parse(localStorage.getItem("viewHistory")) || [];
+
+      history = history.filter(h => h.id !== item.id);
+      history.unshift({ id: item.id, time: Date.now() });
+
+      localStorage.setItem("viewHistory", JSON.stringify(history));
+      window.location.href = `product.html?id=${item.id}`;
+    });
+
+    productDiv.appendChild(product);
+  });
+
+  prevbtn.disabled = currentPage === 1;
+  nextbtn.disabled = end >= allproducts.length;
+}
+
+prevbtn.addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    render();
+  }
+});
+
+
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const query = searchbar.value.trim();
+  if (!query) return;
+  
+  console.log("Query: ",query)
+  let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  console.log("History: ",history)
+
+  let exists = history.some(item => item.query.toLowerCase() === query.toLowerCase())
+
+  if(!exists){
+    history.unshift({
+      query: query,
+      time: Date.now()
+    });
+  }
+  localStorage.setItem("searchHistory",JSON.stringify(history));
+
+  window.location.href = `search.html?search=${encodeURIComponent(query)}`;
+});
+
+const suggestionBox = document.getElementById("suggestion-box");
+searchbar.addEventListener("input", () => {
+  suggestionBox.style.display = "block"
+  const text = searchbar.value.trim().toLowerCase();
+  suggestionBox.innerHTML = "";
+  
+  if (!text) {
+    suggestionBox.style.display = "none"
+    return;
+  }
+  
+  const history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+  const matches = history.filter(item =>
+    item.query.toLowerCase().includes(text)
+  );
+  
+  matches.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "suggestion-item";
+    div.innerText = item.query;
+
+    div.addEventListener("click", () => {
+      searchbar.value = item.query;
+      suggestionBox.innerHTML = "";
+    });
+
+    suggestionBox.appendChild(div);
+  });
+});
+
+function goToHistory(){
+  window.location.href = 'history.html'
+} 
