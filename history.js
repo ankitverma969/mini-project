@@ -1,74 +1,40 @@
-// ===============================
-// LOAD SEARCH HISTORY FROM STORAGE
-// ===============================
+const historySection = document.getElementById("search-history");
 
-// Retrieve search history from localStorage
-// If no history exists, use an empty array
-let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+let searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
-// Get container where history items will be displayed
-let container = document.getElementById("historyList");
+historySection.innerHTML = "";
 
+if (searchHistory.length === 0) {
+    historySection.innerHTML = "<p>No search history yet.</p>";
+} else {
+    searchHistory
+        .sort((a, b) => b.time - a.time)
+        .forEach(item => {
+            const div = document.createElement("div");
+            div.className = "history-item";
+            div.onclick = () =>{
+                window.location.href = `search.html?search=${encodeURIComponent(item.query)}`
+            }
+            const date = new Date(item.time);
 
-// ===============================
-// SORT HISTORY BY MOST RECENT
-// ===============================
+            div.innerHTML = `
+                <div>${item.query.toUpperCase()}</div>
+                <div>${date.toLocaleString()}</div>
+            `;
 
-// Sort search history in descending order of time
-history.sort((a, b) => b.time - a.time);
+            historySection.appendChild(div);
+        });
+}
 
+const clearSearchHistory = () => {
+    localStorage.removeItem("searchHistory");
+    searchHistory = [];
+    historySection.innerHTML = `<p class="empty-history">No search history yet.</p>`;
+};
+function goToViewHistory(){
+  window.location.href = 'viewhistory.html'
+} 
 
-// ===============================
-// DISPLAY SEARCH HISTORY
-// ===============================
-
-history.forEach(item => {
-
-  // Create a container for each history entry
-  let div = document.createElement("div");
-  div.className = "history-item";
-
-  // Convert stored timestamp to Date object
-  let dateObj = new Date(item.time);
-
-  // Format date (DD Mon YYYY)
-  let formattedDate = dateObj.toLocaleDateString("en-IN", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric"
-  });
-
-  // Format time (HH:MM AM/PM)
-  let formattedTime = dateObj.toLocaleTimeString("en-IN", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true
-  });
-
-  // Insert search query, date, and time into history item
-  div.innerHTML = `
-    <strong>${item.query}</strong>
-    <div class="date">${formattedDate}</div>
-    <span class="time">${formattedTime}</span>
-  `;
-
-  // Redirect to search page when a history item is clicked
-  div.addEventListener("click", () => {
-    window.location.href = `search.html?q=${encodeURIComponent(item.query)}`;
-  });
-
-  // Add history item to the page
-  container.appendChild(div);
-});
-
-
-// ===============================
-// CLEAR SEARCH HISTORY FUNCTION
-// ===============================
-
-// Remove search history from localStorage
-// Clear history display from the page
-function clearHistory() {
-  localStorage.removeItem("searchHistory");
-  container.innerHTML = "";
+function goToHome(){
+    window.location.href = 'index.html'
 }

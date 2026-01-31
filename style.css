@@ -1,85 +1,196 @@
-/* =========================
-   GLOBAL PAGE STYLING
-   ========================= */
-
-/* Basic font and background for the entire page */
-body {
-  font-family: Arial;
-  background-color: rgb(241, 244, 244);
+body{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.left-nav{
+    font-size: 2.5rem;
+    font-weight: 900;
+ }
+.nav-cover{
+    position: sticky;
+    top: 0;
+    box-shadow: 0px 3px 5px grey;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    width: 90vw;
+    align-self: center;
+    padding: 1rem;
+}
+.right-nav{
+    display:flex;
+}
+.search-element{
+    font-size: 2rem;
+}
+.nav-btn{
+    height: 2rem;
+    font-size: 1rem;
+    border-radius: 1rem;
+    padding: 0rem 0.75rem;
+    background-color: rgb(234, 234, 234);
+    border: 0px;
+    box-shadow: 0px 2px 5px grey;
+}
+#search-bar{
+    border: 0px;
+    box-shadow: 0px 2px 3px grey;
+    height: 2rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    width: 20vw;
+    padding: 0rem 1rem;
+}
+#search-bar:focus{
+    outline: none;
 }
 
-
-/* =========================
-   PRODUCT GRID LAYOUT
-   ========================= */
-
-/* Container that holds all product cards */
-#prod {
-  display: grid;                          /* Enables grid layout */
-  grid-template-columns: repeat(4, 1fr);  /* 4 cards per row */
-  gap: 20px;                              /* Space between cards */
+form{
+    display: flex;
+    justify-content: space-between;
+}
+.search-element{
+    margin:4px
+}
+#suggestion-box{
+    position: absolute;
+    z-index: 2;
+    display: none;
+    /* width: 19rem; */
+    align-self: center;
+    background-color: rgb(234, 234, 234);
+    box-shadow: 0px 2px 5px grey;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 1rem;
 }
 
-
-/* =========================
-   PRODUCT CARD STYLING
-   ========================= */
-
-/* Individual product card */
-.card {
-  border: 1px solid grey;     /* Light border around card */
-  padding: 10px;              /* Inner spacing */
-  border-radius: 8px;         /* Rounded corners */
-  background-color: white;    /* Card background */
+#product-section{
+    width: 90vw;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    align-self: center;
+}
+.product{
+    margin: 10px;
+    border: 2px solid rgb(234, 234, 234);
+    background-color: rgb(234, 234, 234);
+    display: flex;
+    flex-direction: column;
+    height:400px;
+    width:300px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px grey;
+}
+.product-img{
+    align-self: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.product-title{
+    text-align: center;
+    padding: 4px;
+    margin: 0px;
+}
+.product-price{
+    text-align: center;
+    margin: 0px;
+}
+#product-detail{
+    background-color: rgb(234, 234, 234);   
+    width: 90vw;
+    align-self: center;
+    margin-top: 2rem;
+    box-shadow: 0px 2px 5px grey;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+.product-detail-left{
+    /* height: 80vh; */
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+.product-detail-right{
+    width: 55%;
+    /* height: 80vh; */
 }
 
-/* Product image inside card */
-.card img {
-  width: 100%;                /* Full width of card */
-  height: 250px;              /* Fixed height */
-  object-fit: cover;          /* Crop image properly */
+#image{
+    width: 90%;
 }
 
-/* Hover effect on product card */
-.card:hover {
-  transform: scale(1.05);                     /* Slight zoom */
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);     /* Shadow effect */
-  cursor: pointer;                            /* Pointer cursor */
+.page-btn-sec{
+    display: flex;
+    justify-content: center;
+    margin:2rem;
+}
+#page-number{
+    width:10rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+#products{
+    width: 90vw;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-self: center;
+    margin: 1rem 0rem;
+}
+.page-btn{
+    height: 3rem;
+    font-size: 1rem;
+    border-radius: 1.5rem;
+    padding: 1rem 1rem;
+    background-color: rgb(234, 234, 234);
+    border: 0px;
+    box-shadow: 0px 2px 5px grey;
 }
 
-
-/* =========================
-   SEARCH BUTTON STYLING
-   ========================= */
-
-/* Hover effect for search button */
-#searchBtn:hover {
-  background-color: rgb(198, 224, 246); /* Light blue background */
-  border: 1px solid grey;               /* Border on hover */
-  cursor: pointer;                      /* Pointer cursor */
-  border-radius: 2px;                   /* Slight rounding */
+#availability{
+    /* width: 4.5rem; */
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    border: 2px solid green;
+    color:green;
+    margin-top: 1rem;
+    align-self: self-start;
+}
+#title{
+    font-size: 2rem;
+    margin-top: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
 }
 
-
-/* =========================
-   PAGINATION STYLING
-   ========================= */
-
-/* Pagination container */
-#pagination {
-  text-align: center;     /* Center pagination buttons */
-  margin: 20px 0;         /* Vertical spacing */
+.product-detail-right div{
+    padding: .25rem
 }
 
-/* Pagination buttons */
-#pagination button {
-  margin: 5px;            /* Space between buttons */
-  padding: 6px 12px;      /* Button size */
-  cursor: pointer;        /* Pointer cursor */
+#search-history{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
 }
-
-/* Active page button */
-#pagination button.active {
-  background: black;      /* Highlight active page */
-  color: white;           /* Text color */
+.history-item{
+    padding: 1rem;
+    margin: 0.5rem 0rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px grey;
 }

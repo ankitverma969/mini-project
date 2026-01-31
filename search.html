@@ -1,54 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Character encoding for correct text display -->
     <meta charset="UTF-8">
-
-    <!-- Ensures responsive layout on all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Page title -->
-    <title>Searching</title>
-
-    <!-- Common stylesheet used across pages -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- JavaScript file for handling search logic -->
-    <script src="search.js"></script>
+    <title>Search Results</title>
+    <link href="./style.css" rel="stylesheet">
 </head>
 <body>
+    <header class="nav-cover">
+        <navbar class="navbar">
+            <div class="left-nav">Search Results</div>
+            <div class="right-nav">
+            <form id="search-form">
+                <div class="search-element">
+                    <input type="text" id="search-bar" name="search" placeholder="Search products..." />
+                    <div id="suggestion-box"></div>
+                </div>
+                <div class="search-element">
+                    <button type="submit" class="nav-btn" id="search-btn">Search</button>
+                </div>
+            </form>
+            <div class="search-element">
+                <button class="nav-btn" onclick="goToSearchHistory()">Search History</button>
+            </div>
+            <div class="search-element">
+                <button class="nav-btn" onclick="goToViewHistory()">View History</button>
+            </div>
+        </div>
+    </navbar>
+    </header>
+    <section id="product-section">
+        <div id="products">
 
-    <!-- Page heading -->
-    <h1>Product Store</h1>
-
-    <!-- Search input container -->
-    <div class="search-box">
-
-        <!-- Input field for entering search query -->
-        <input 
-            type="text" 
-            placeholder="Search Your Product Here" 
-            id="searchInput"
-        >
-
-        <!-- Container to show search suggestions dynamically -->
-        <div id="suggestions"></div>
-    </div>
-
-    <!-- Button to initiate search -->
-    <button type="button">Search</button>
-
-    <!-- Line breaks for spacing -->
-    <br><br>
-    
-    <!-- Container to display searched product cards -->
-    <div id="prod"></div> 
-
-    <!-- Heading to show search result status -->
-    <h4 id="heading"></h4>
-
-    <!-- Container to display final filtered results -->
-    <div id="results"></div>
+        </div>
+        <div class="page-btn-sec">
+            <button id="prev-btn" class="page-btn">Previous</button>
+            <div id="page-number"></div>
+            <button id="next-btn" class="page-btn">Next</button>
+        </div>
+    </section>
 
 </body>
+<script src="./search.js"></script>
 </html>

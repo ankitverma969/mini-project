@@ -3,32 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search History</title>
+    <title>View History</title>
     <link href="./style.css" rel="stylesheet">
 </head>
 <body>
     <header class="nav-cover">
         <navbar class="navbar">
-            <div class="left-nav">Search History</div>
+            <div class="left-nav">View History</div>
             <div class="right-nav">
             
+                
             <div class="search-element">
                 <button class="nav-btn" onclick="goToHome()">Home</button>
             </div>
             <div class="search-element">
-                <button class="nav-btn" onclick="clearSearchHistory()">Clear Search History</button>
+                <button class="nav-btn" onclick="goToSearchHistory()">Search History</button>
             </div>
             <div class="search-element">
-                <button class="nav-btn" onclick="goToViewHistory()">View History</button>
+                <button class="nav-btn" onclick="clearViewHistory()">Clear View History</button>
             </div>
         </div>
     </navbar>
     </header>
      <section id="product-section">
-        <div id="search-history">
+        <div id="products">
 
+        </div>
+        <div class="page-btn-sec">
+            <button id="prev-btn" class="page-btn">Previous</button>
+            <div id="page-number"></div>
+            <button id="next-btn" class="page-btn">Next</button>
         </div>
     </section>
 </body>
-<script src="./history.js"></script>
+<script src="./viewhistory.js"></script>
 </html>
