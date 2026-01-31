@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding for correct text display -->
     <meta charset="UTF-8">
+
+    <!-- Ensures responsive layout on all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title shown in browser tab -->
     <title>Search History</title>
+
+    <!-- JavaScript file to handle search history logic -->
+    <!-- defer ensures script runs after HTML is fully loaded -->
     <script src="history.js" defer></script>
+
+    <!-- CSS file specific to history page styling -->
     <link rel="stylesheet" href="history.css">
 </head>
 <body>
+
+    <!-- Header section for history page -->
     <div class="history-header">
+
+        <!-- Page heading -->
         <h1>Your Search History</h1>
-        <button id="clear" onclick={clearHistory()}>Clear Search History</button>
+
+        <!-- Button to clear all stored search history -->
+        <button id="clear" onclick="{clearHistory()}">
+            Clear Search History
+        </button>
+
     </div>
+
+    <!-- Line breaks for spacing -->
     <br><br>
+
+    <!-- Container to display search history items dynamically -->
     <div id="historyList"></div>
+
 </body>
 </html>
