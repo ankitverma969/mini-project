@@ -1,24 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding for correct text display -->
     <meta charset="UTF-8">
+
+    <!-- Ensures responsive layout on all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title -->
     <title>Searching</title>
+
+    <!-- Common stylesheet used across pages -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- JavaScript file for handling search logic -->
     <script src="search.js"></script>
 </head>
 <body>
+
+    <!-- Page heading -->
     <h1>Product Store</h1>
+
+    <!-- Search input container -->
     <div class="search-box">
-        <input type="text" placeholder="Search Your Product Here" id="searchInput">
+
+        <!-- Input field for entering search query -->
+        <input 
+            type="text" 
+            placeholder="Search Your Product Here" 
+            id="searchInput"
+        >
+
+        <!-- Container to show search suggestions dynamically -->
         <div id="suggestions"></div>
     </div>
+
+    <!-- Button to initiate search -->
     <button type="button">Search</button>
+
+    <!-- Line breaks for spacing -->
     <br><br>
     
+    <!-- Container to display searched product cards -->
     <div id="prod"></div> 
 
+    <!-- Heading to show search result status -->
     <h4 id="heading"></h4>
+
+    <!-- Container to display final filtered results -->
     <div id="results"></div>
+
 </body>
 </html>
