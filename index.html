@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding for proper text rendering -->
     <meta charset="UTF-8">
+
+    <!-- Makes the page responsive on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title shown in browser tab -->
     <title>Project</title>
+
+    <!-- Main CSS file for styling the page -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Main JavaScript file (defer ensures HTML loads first) -->
     <script src="script.js" defer></script>
 </head>
 <body>
+
+    <!-- Main heading of the application -->
     <h1>Product Store</h1>
-    <input type="text" id="searchInput" placeholder="Search Your Product Here">
+
+    <!-- Search input field for product search -->
+    <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Search Your Product Here"
+    >
+
+    <!-- Button to trigger search -->
     <button id="searchBtn">Search</button>
 
-    <button><a href="history.html">View History</a></button>
+    <!-- Button to navigate to search history page -->
+    <button>
+        <a href="history.html">View History</a>
+    </button>
 
+    <!-- Container to display search suggestions dynamically -->
     <div id="suggestions"></div>
     
+    <!-- Line breaks for spacing -->
     <br><br>
 
+    <!-- Container where product cards are dynamically rendered -->
     <div id="prod"></div>
+
+    <!-- Container for pagination buttons -->
     <div id="pagination"></div>
 
 </body>
