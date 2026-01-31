@@ -2,45 +2,68 @@
 <html lang="en">
 
 <head>
+    <!-- Character encoding for correct text rendering -->
     <meta charset="UTF-8">
+
+    <!-- Enables responsive layout on all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title shown in browser tab -->
     <title>Product Details</title>
+
+    <!-- JavaScript file to fetch and display product details -->
+    <!-- defer ensures the script runs after HTML is fully loaded -->
     <script src="product.js" defer></script>
+
+    <!-- CSS file specific to product detail page styling -->
     <link rel="stylesheet" href="product.css">
 </head>
 
 <body>
 
-<div class="box">
+    <!-- Main container for product details -->
+    <div class="box">
 
-    <h1 class="title" id="title"></h1>
+        <!-- Product title -->
+        <h1 class="title" id="title"></h1>
 
-    <div class="box-content">
+        <!-- Layout container for image and product information -->
+        <div class="box-content">
 
-        <div class="image-box">
-            <img id="thumbnail" />
-        </div>
+            <!-- Product image section -->
+            <div class="image-box">
+                <img id="thumbnail" />
+            </div>
 
-        <div class="info-box">
+            <!-- Product information section -->
+            <div class="info-box">
 
-            <p class="description" id="description"></p>
+                <!-- Product description -->
+                <p class="description" id="description"></p>
 
-            <p class="price">₹ <span id="price"></span></p>
-            <p class="availability">
-                <b>Availability:</b> <span id="availability"></span>
-            </p>
+                <!-- Product price -->
+                <p class="price">
+                    ₹ <span id="price"></span>
+                </p>
 
-            <ul id="details"></ul>
+                <!-- Product availability status -->
+                <p class="availability">
+                    <b>Availability:</b>
+                    <span id="availability"></span>
+                </p>
 
-            <div id="tags"></div>
+                <!-- List for additional product details -->
+                <ul id="details"></ul>
+
+                <!-- Container for product tags -->
+                <div id="tags"></div>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
-
 </body>
-
 
 </html>
